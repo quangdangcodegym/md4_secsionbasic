@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="header.html::headerfiles">
+    <meta charset="UTF-8">
+    <title>Listing</title>
+</head>
+<body>
+<h1 class="title">Books Store <small>Bookshelf</small></h1>
+<div class="container">
+    <table class="table table-hover">
+        <thead>
+        <th>
+            Book Name
+        </th>
+        <th>
+            Image
+        </th>
+        <th>
+            Price
+        </th>
+        <th colspan="2">
+            Action
+        </th>
+        </thead>
+        <tbody>
+        <tr th:each="book: ${books}">
+            <td th:text="${book.getName()}"></td>
+            <td><img style="width: 200px; height: 400px" th:src="@{'images/'+${book.getImage_url()}}"></td>
+            <td th:text="${book.getPrice()}"></td>
+            <td>
+                <a th:href="@{/viewDetail/{id}(id=${book.getId()})}">View Detail</a>
+            </td>
+            <td>
+                <a th:href="@{/addToCart/{id}(id=${book.getId()})}">Add to cart</a>
+            </td>
+        </tr>
+        <tr>
+            <td><a th:href="@{/viewCart}">View cart</a></td>
+        </tr>
+        </tbody>
+
+    </table>
+</div>
+
+</body>
+</html>
